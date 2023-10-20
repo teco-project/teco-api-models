@@ -2050,14 +2050,6 @@
         "title": "GenHiveTableDDLSql"
       }
     ],
-    "GetFileInfo": [
-      {
-        "document": "开发空间-获取数据开发脚本信息",
-        "input": "POST / HTTP/1.1\nHost: wedata.tencentcloudapi.com\nContent-Type: application/json\nX-TC-Action: GetFileInfo\n<公共请求参数>\n\n{\n    \"ProjectId\": \"1486804694126882816\",\n    \"FilePath\": \"/datastudio/project/1486804694126882816/hui/111.sql\"\n}",
-        "output": "{\n    \"Response\": {\n        \"RequestId\": \"915a8a1f-04d8-463c-9687-9bd3a696b7ce\",\n        \"UserFileInfo\": {\n            \"Bucket\": \"wedata-fusion-dev-1257305158\",\n            \"CreateTime\": \"2023-05-18 20:24:32\",\n            \"DeleteName\": null,\n            \"DeleteOwner\": null,\n            \"ExtraInfo\": [\n                {\n                    \"ParamKey\": \"DatasourceType\",\n                    \"ParamValue\": \"HIVE\"\n                },\n                {\n                    \"ParamKey\": \"DatasourceId\",\n                    \"ParamValue\": \"8445\"\n                },\n                {\n                    \"ParamKey\": \"GroupId\",\n                    \"ParamValue\": \"\"\n                },\n                {\n                    \"ParamKey\": \"ResourceQueue\",\n                    \"ParamValue\": \"root.default\"\n                },\n                {\n                    \"ParamKey\": \"ComputeResource\",\n                    \"ParamValue\": \"\"\n                },\n                {\n                    \"ParamKey\": \"DatabaseName\",\n                    \"ParamValue\": \"\"\n                },\n                {\n                    \"ParamKey\": \"ConfParams\",\n                    \"ParamValue\": \"&&&ResourceConfParams=&&&}}\"\n                }\n            ],\n            \"FileExtensionType\": \"sql\",\n            \"FileName\": \"111.sql\",\n            \"LocalPath\": \"/datastudio/project/hui/111.sql\",\n            \"LocalTempPath\": null,\n            \"Md5Value\": null,\n            \"Operator\": null,\n            \"OperatorName\": null,\n            \"Owner\": \"100028579427\",\n            \"OwnerName\": \"hhhuilli\",\n            \"PathDepth\": 4,\n            \"ProjectId\": \"1486804694126882816\",\n            \"Region\": \"ap-nanjing\",\n            \"RemotePath\": \"/datastudio/project/1486804694126882816/hui/111.sql\",\n            \"ResourceId\": \"3adddc91-21e2-494d-a207-1ee4c70d77f4\",\n            \"Size\": null,\n            \"Type\": \"project\",\n            \"UpdateTime\": \"2023-05-18 20:25:55\",\n            \"ZipPath\": null\n        }\n    }\n}",
-        "title": "开发空间-获取数据开发脚本信息"
-      }
-    ],
     "GetIntegrationNodeColumnSchema": [
       {
         "document": "",

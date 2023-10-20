@@ -1694,13 +1694,6 @@
       "output": "GenHiveTableDDLSqlResponse",
       "status": "online"
     },
-    "GetFileInfo": {
-      "document": "开发空间-获取数据开发脚本信息",
-      "input": "GetFileInfoRequest",
-      "name": "开发空间-获取数据开发脚本信息",
-      "output": "GetFileInfoResponse",
-      "status": "online"
-    },
     "GetIntegrationNodeColumnSchema": {
       "document": "提取数据集成节点字段Schema",
       "input": "GetIntegrationNodeColumnSchemaRequest",
@@ -26707,51 +26700,6 @@
         }
       ],
       "usage": "in"
-    },
-    "GetFileInfoRequest": {
-      "document": "GetFileInfo请求参数结构体",
-      "members": [
-        {
-          "disabled": false,
-          "document": "项目ID",
-          "example": "无",
-          "member": "string",
-          "name": "ProjectId",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "disabled": false,
-          "document": "文件路径",
-          "example": "无",
-          "member": "string",
-          "name": "FilePath",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "type": "object"
-    },
-    "GetFileInfoResponse": {
-      "document": "GetFileInfo返回参数结构体",
-      "members": [
-        {
-          "disabled": false,
-          "document": "当前脚本信息\n注意：此字段可能返回 null，表示取不到有效值。",
-          "example": "无",
-          "member": "UserFileInfo",
-          "name": "UserFileInfo",
-          "type": "object",
-          "value_allowed_null": true
-        },
-        {
-          "document": "唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。",
-          "member": "string",
-          "name": "RequestId",
-          "type": "string"
-        }
-      ],
-      "type": "object"
     },
     "GetIntegrationNodeColumnSchemaRequest": {
       "document": "GetIntegrationNodeColumnSchema请求参数结构体",

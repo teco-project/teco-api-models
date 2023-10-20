@@ -9670,11 +9670,20 @@
       "members": [
         {
           "disabled": false,
+          "document": "API文档ID",
+          "example": "doc-v8tsladd",
+          "member": "string",
+          "name": "ApiDocId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
           "document": "API文档名称",
           "example": "ApiGateWay Doc",
           "member": "string",
           "name": "ApiDocName",
-          "required": true,
+          "required": false,
           "type": "string"
         },
         {
@@ -9683,7 +9692,7 @@
           "example": "service-2nuhovb7",
           "member": "string",
           "name": "ServiceId",
-          "required": true,
+          "required": false,
           "type": "string"
         },
         {
@@ -9692,7 +9701,7 @@
           "example": "release",
           "member": "string",
           "name": "Environment",
-          "required": true,
+          "required": false,
           "type": "string"
         },
         {
@@ -9701,17 +9710,8 @@
           "example": "[api-2dvasde2,api-zewq23]",
           "member": "string",
           "name": "ApiIds",
-          "required": true,
+          "required": false,
           "type": "list"
-        },
-        {
-          "disabled": false,
-          "document": "API文档ID",
-          "example": "doc-v8tsladd",
-          "member": "string",
-          "name": "ApiDocId",
-          "required": true,
-          "type": "string"
         }
       ],
       "type": "object"
@@ -9725,7 +9725,7 @@
           "example": "无",
           "member": "APIDoc",
           "name": "Result",
-          "output_required": true,
+          "required": true,
           "type": "object",
           "value_allowed_null": false
         },
