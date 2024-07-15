@@ -12454,7 +12454,7 @@
           "example": "0",
           "member": "int64",
           "name": "Status",
-          "output_required": true,
+          "required": true,
           "type": "int",
           "value_allowed_null": false
         },
@@ -12509,7 +12509,6 @@
           "example": "无",
           "member": "DescribeFlow",
           "name": "Infos",
-          "output_required": true,
           "type": "list",
           "value_allowed_null": false
         },
@@ -12519,7 +12518,6 @@
           "example": "1",
           "member": "int64",
           "name": "TotalNum",
-          "output_required": true,
           "type": "int",
           "value_allowed_null": false
         },
@@ -12602,7 +12600,7 @@
           "example": "无",
           "member": "DescribeEvent",
           "name": "Infos",
-          "output_required": true,
+          "required": true,
           "type": "list",
           "value_allowed_null": false
         },
@@ -12612,7 +12610,7 @@
           "example": "1",
           "member": "int64",
           "name": "PageNum",
-          "output_required": true,
+          "required": true,
           "type": "int",
           "value_allowed_null": false
         },
@@ -12622,7 +12620,7 @@
           "example": "10",
           "member": "int64",
           "name": "PageSize",
-          "output_required": true,
+          "required": true,
           "type": "int",
           "value_allowed_null": false
         },
@@ -12632,7 +12630,7 @@
           "example": "1",
           "member": "int64",
           "name": "TotalNum",
-          "output_required": true,
+          "required": true,
           "type": "int",
           "value_allowed_null": false
         },
@@ -12642,7 +12640,7 @@
           "example": "1",
           "member": "int64",
           "name": "TotalPage",
-          "output_required": true,
+          "required": true,
           "type": "int",
           "value_allowed_null": false
         },
