@@ -382,7 +382,7 @@
         },
         {
           "disabled": false,
-          "document": "Specifies the identity document type used for authentication. valid values:.  \n\n1. HK (default): hong kong (china) identity card.\n2. ML: malaysian identity card.\n3. Indonesian identity card.\n4. PhilippinesVoteID: specifies the voter card in the philippines.\n5. PhilippinesDrivingLicense: specifies the driving license in philippines.\n6. PhilippinesTinID: specifies the philippines tin id.\n7. PhilippinesSSSID: specifies the SSSID in the philippines.\n8. philippines UMID: specifies the philippines UMID.\n9. MLIDPassport: specifies the passport for hong kong (china), macao (china), and taiwan (china) as well as overseas passports.\n10. ThailandIDCard: specifies the thai identity card.\n11. Mainland id card.\n12. SingaporeIDCard: specifies the Singapore id card.\n13. HMTPermit: specifies the hong kong, macau and taiwan travel permit.",
+          "document": "Specifies the identity document type used for authentication. Valid values:\n\n1. HK (default): Hong Kong (China) Identity Card.\n2. ML: Malaysia Identity Card.\n3. IndonesiaIDCard: Indonesia Identity Card.\n4. PhilippinesVoteID: Philippines Voter's ID.\n5. PhilippinesDrivingLicense: Philippines Driving License.\n6. PhilippinesTinID: Philippines TIN ID.\n7. PhilippinesSSSID: Philippines SSS ID.\n8. PhilippinesUMID: Philippines UMID.\n9. MLIDPassport: Passports of Hong Kong (China), Macao (China), and Taiwan (China), as well as overseas regions.\n10. ThailandIDCard: Thailand Identity Card.\n11. MainlandIDCard: Chinese Mainland Identity Card.\n12. SingaporeIDCard: Singapore Identity Card.\n13. HMTPermit: Travel Permit for Hong Kong (China), Macao (China), and Taiwan (China).",
           "example": "HK",
           "member": "string",
           "name": "IdCardType",
@@ -548,6 +548,15 @@
           "example": "false",
           "member": "bool",
           "name": "AllowUploadPhoto",
+          "required": false,
+          "type": "bool"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>\n",
+          "example": "false",
+          "member": "bool",
+          "name": "EnableBotBgDetection",
           "required": false,
           "type": "bool"
         }
@@ -2821,6 +2830,15 @@
           "name": "RetryLimit",
           "required": false,
           "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>\n",
+          "example": "false",
+          "member": "bool",
+          "name": "EnableBotBgDetection",
+          "required": false,
+          "type": "bool"
         }
       ],
       "type": "object"
@@ -2835,6 +2853,16 @@
           "member": "string",
           "name": "SdkToken",
           "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Encrypted string of server-side parameters",
+          "example": "AQM0izDAbXkF",
+          "member": "string",
+          "name": "ServerParamInfo",
+          "output_required": false,
           "type": "string",
           "value_allowed_null": false
         },
