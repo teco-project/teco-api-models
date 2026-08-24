@@ -1651,7 +1651,7 @@
         },
         {
           "disabled": false,
-          "document": "CIDR allowlist\nThis parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.\nNote: This field may return `null`, indicating that no valid value was found.",
+          "document": "CIDR Whitelist List. Effective when Protocol is RTMP_PULL. Empty means no restriction on client IP.",
           "example": "[\"0.0.0.0/0\"]",
           "member": "string",
           "name": "AllowIpList",
@@ -1661,7 +1661,7 @@
         },
         {
           "disabled": false,
-          "document": "",
+          "document": "The output RTSP streaming configuration information.",
           "example": "无",
           "member": "DescribeOutputRTSPPullSettings",
           "name": "RTSPPullSettings",
@@ -1671,7 +1671,7 @@
         },
         {
           "disabled": false,
-          "document": "",
+          "document": "Output the HLS streaming configuration information.",
           "example": "无",
           "member": "DescribeOutputHLSPullSettings",
           "name": "HLSPullSettings",
@@ -1681,7 +1681,7 @@
         },
         {
           "disabled": false,
-          "document": "",
+          "document": "The maximum number of concurrent streams is 4, with a default of 4.",
           "example": "1",
           "member": "uint64",
           "name": "MaxConcurrent",
@@ -1698,6 +1698,66 @@
           "output_required": false,
           "type": "list",
           "value_allowed_null": true
+        },
+        {
+          "disabled": false,
+          "document": "The available zone currently only supports a maximum of one output.",
+          "example": "[\"ap-shanghai-01\"]",
+          "member": "string",
+          "name": "Zones",
+          "output_required": false,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Output RIST configuration information.",
+          "example": "无",
+          "member": "DescribeOutputRISTSettings",
+          "name": "RISTSettings",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": true,
+          "document": "For streams containing multiple audio/video tracks, you can specify the tracks that need to be used",
+          "example": "无",
+          "member": "PidSelector",
+          "name": "PidSelector",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Output module types, including Pinpoint (single point output, supporting up to four concurrent outputs); MultiMesh (Multi output, supports concurrent outputs greater than four, currently up to 200). The default type is Pinpoint output. For a single Flow, a region can only have a maximum of one MultiMesh output.",
+          "example": "Pinpoint",
+          "member": "string",
+          "name": "OutputKind",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Output module configuration, relevant URLs, including provided streaming addresses or configured output to third-party forwarding addresses",
+          "example": "无",
+          "member": "StreamUrlDetail",
+          "name": "StreamUrls",
+          "output_required": false,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "For streams containing multiple audio/video tracks, you can specify the tracks that need to be used",
+          "example": "无",
+          "member": "StreamSelector",
+          "name": "StreamSelector",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
         }
       ],
       "usage": "out"
@@ -1728,6 +1788,52 @@
           "member": "DescribeOutputHLSPullServerUrl",
           "name": "ServerUrls",
           "required": true,
+          "type": "list",
+          "value_allowed_null": true
+        }
+      ],
+      "usage": "out"
+    },
+    "DescribeOutputRISTSettings": {
+      "document": "",
+      "members": [
+        {
+          "disabled": false,
+          "document": "",
+          "example": "LISTENER",
+          "member": "string",
+          "name": "Mode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "",
+          "example": "MAIN",
+          "member": "string",
+          "name": "Profile",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "",
+          "example": "120",
+          "member": "int64",
+          "name": "Buffer",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "",
+          "example": "无",
+          "member": "OutputRISTSourceAddressResp",
+          "name": "SourceAddresses",
+          "output_required": false,
           "type": "list",
           "value_allowed_null": true
         }
@@ -4090,6 +4196,32 @@
           "required": true,
           "type": "string",
           "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "OutputRISTSourceAddressResp": {
+      "document": "",
+      "members": [
+        {
+          "disabled": false,
+          "document": "",
+          "example": "1.1.1.1",
+          "member": "string",
+          "name": "Ip",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": true
+        },
+        {
+          "disabled": false,
+          "document": "",
+          "example": "65535",
+          "member": "int64",
+          "name": "Port",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": true
         }
       ],
       "usage": "out"
