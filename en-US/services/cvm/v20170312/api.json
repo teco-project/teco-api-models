@@ -2004,6 +2004,15 @@
           "name": "TemplateDataModifyAction",
           "required": false,
           "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).",
+          "example": "无",
+          "member": "NetworkInterfaces",
+          "name": "NetworkInterfaces",
+          "required": false,
+          "type": "list"
         }
       ],
       "type": "object"
@@ -2311,6 +2320,15 @@
           "name": "TemplateDataModifyAction",
           "required": false,
           "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).",
+          "example": "无",
+          "member": "NetworkInterfaces",
+          "name": "NetworkInterfaces",
+          "required": false,
+          "type": "list"
         }
       ],
       "type": "object"
@@ -5883,6 +5901,15 @@
           "name": "LaunchTemplate",
           "required": false,
           "type": "object"
+        },
+        {
+          "disabled": false,
+          "document": "Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).",
+          "example": "无",
+          "member": "NetworkInterfaces",
+          "name": "NetworkInterfaces",
+          "required": false,
+          "type": "list"
         }
       ],
       "type": "object"
@@ -8368,6 +8395,75 @@
       ],
       "type": "object"
     },
+    "NetworkInterfaces": {
+      "document": "Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Specifies whether the network interface is primary or secondary. Valid values must be uppercase. The `NetworkInterfaces` array must contain exactly one `PRIMARY` network interface and can contain multiple `SECONDARY` network interfaces. Valid values:<li>`PRIMARY`: Primary network interface.</li><li>`SECONDARY`: Secondary network interface.</li>",
+          "example": "PRIMARY",
+          "member": "string",
+          "name": "InterfaceType",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "VPC ID in the format of `vpc-xxx`. You can obtain a valid VPC ID from the [VPC console](https://console.tencentcloud.com/vpc/vpc?rid=1) or from the `VpcId` field returned by the [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) API. If both `VpcId` and `SubnetId` are set to `DEFAULT` when creating an instance, the default VPC is used.",
+          "example": "vpc-h2rxr2iv",
+          "member": "string",
+          "name": "VpcId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "VPC subnet ID in the format of `subnet-xxx`. You can obtain a valid subnet ID from the [subnet console](https://console.tencentcloud.com/vpc/subnet) or from the `SubnetId` field returned by the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784) API. If both `SubnetId` and `VpcId` are set to `DEFAULT` when creating an instance, the default VPC is used.",
+          "example": "subnet-bshmz62m",
+          "member": "string",
+          "name": "SubnetId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Required. Specifies the number of private IPv4 addresses automatically assigned to each network interface. Manually specifying IP addresses and automatically assigning IP addresses at the same time is not supported. Valid range: [1, 50].",
+          "example": "1",
+          "member": "int64",
+          "name": "PrivateIpv4AddressCount",
+          "required": true,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "ID of an existing elastic network interface (ENI) to be attached. This parameter applies only to secondary network interfaces. The primary network interface is created automatically through the existing process and cannot be specified using this parameter. When an existing ENI is specified, `InstanceCount` must be set to 1.",
+          "example": "eni-l6gdyio1",
+          "member": "string",
+          "name": "NetworkInterfaceId",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Security groups associated with the instance. You can obtain the security group IDs from the `SecurityGroupId` field returned by the [DescribeSecurityGroups](https://www.tencentcloud.com/document/api/215/15808) API. If this parameter is not specified, the default security group of the specified project is associated. If no default security group exists, one is automatically created. Each user can configure up to 50 security groups per project in each region.",
+          "example": "[\"sg-os13k3gt\"]",
+          "member": "string",
+          "name": "SecurityGroupIds",
+          "required": false,
+          "type": "list"
+        },
+        {
+          "disabled": false,
+          "document": "Specifies whether the associated elastic network interface (ENI) is deleted when the CVM instance is terminated. This parameter applies only to secondary network interfaces. By default, secondary network interfaces are retained to preserve the existing behavior. This parameter does not apply to the primary network interface, which is always deleted when the instance is terminated. Default value: `false`.",
+          "example": "false",
+          "member": "bool",
+          "name": "DeleteWithInstance",
+          "required": false,
+          "type": "bool"
+        }
+      ],
+      "usage": "in"
+    },
     "OperationCountLimit": {
       "document": "Describes the maximum number of times you can perform an operation on a single instance.",
       "members": [
@@ -9997,6 +10093,15 @@
         },
         {
           "disabled": false,
+          "document": "Partition number of the partition placement group. Valid values depend on the number of partitions in the selected placement group. If the selected placement group is a partition placement group and this parameter is not specified, a partition is randomly assigned. This feature is in beta test.",
+          "example": "2",
+          "member": "int64",
+          "name": "PartitionNumber",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
           "document": "Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.",
           "example": "false",
           "member": "bool",
@@ -10012,6 +10117,15 @@
           "name": "EnableJumboFrame",
           "required": false,
           "type": "bool"
+        },
+        {
+          "disabled": false,
+          "document": "Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).",
+          "example": "无",
+          "member": "NetworkInterfaces",
+          "name": "NetworkInterfaces",
+          "required": false,
+          "type": "list"
         }
       ],
       "type": "object"

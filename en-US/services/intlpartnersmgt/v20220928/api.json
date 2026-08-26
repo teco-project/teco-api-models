@@ -85,9 +85,9 @@
       "status": "online"
     },
     "DescribeCustomerBillDetail": {
-      "document": "This API is used to query the customer bill details by resellers.\nCallable roles: Distributor, Second-level reseller, Reseller.",
+      "document": "Description: Query customer bill details.\nResellers, first-level resellers, and second-level resellers can call this API.",
       "input": "DescribeCustomerBillDetailRequest",
-      "name": "Queries the customer bill details",
+      "name": "Queries sub-client bill details",
       "output": "DescribeCustomerBillDetailResponse",
       "status": "online"
     },
@@ -106,9 +106,9 @@
       "status": "online"
     },
     "DescribeCustomerBillSummary": {
-      "document": "This API is used to query the total amount of customer bills.\nCallable roles: Distributor, Second-level reseller, Reseller",
+      "document": "Query the aggregate value of a sub-client bill",
       "input": "DescribeCustomerBillSummaryRequest",
-      "name": "Queries the total amount of customer bills",
+      "name": "Queries the sub-customer bill summary value",
       "output": "DescribeCustomerBillSummaryResponse",
       "status": "online"
     },
@@ -597,11 +597,11 @@
       "type": "object"
     },
     "BillDetailData": {
-      "document": "Customer bill details",
+      "document": "Customer Bill Details",
       "members": [
         {
           "disabled": false,
-          "document": "reseller account.",
+          "document": "<p> Distributor account</p>",
           "example": "800000448722",
           "member": "int64",
           "name": "PayerAccountId",
@@ -611,7 +611,7 @@
         },
         {
           "disabled": false,
-          "document": "Subaccount.",
+          "document": "<p>Sub-Customer account</p>",
           "example": "800000448824",
           "member": "int64",
           "name": "OwnerAccountId",
@@ -621,7 +621,7 @@
         },
         {
           "disabled": false,
-          "document": "Operator account.",
+          "document": "<p>Operator account</p>",
           "example": "800000448824",
           "member": "int64",
           "name": "OperatorAccountId",
@@ -631,7 +631,7 @@
         },
         {
           "disabled": false,
-          "document": "Product name.",
+          "document": "<p>Product name.</p>",
           "example": "cloud block storage",
           "member": "string",
           "name": "ProductName",
@@ -641,7 +641,7 @@
         },
         {
           "disabled": false,
-          "document": "Billing mode\n.\nMonthly subscription (annual and monthly).\nPay-As-You-Go resources.\nStandard ri reserved instance.",
+          "document": "<p>Billing mode</p><p>Enumeration values:</p><ul><li>yearly/monthly subscription</li><li>Pay-As-You-Go resources</li></ul>",
           "example": "Pay-As-You-Go resources",
           "member": "string",
           "name": "BillingMode",
@@ -651,7 +651,7 @@
         },
         {
           "disabled": false,
-          "document": "Project name.\n",
+          "document": "<p>Project name.</p>",
           "example": "default",
           "member": "string",
           "name": "ProjectName",
@@ -661,7 +661,7 @@
         },
         {
           "disabled": false,
-          "document": "Resource region.",
+          "document": "<p>Associated region of the resource</p>",
           "example": "East China (Shanghai)",
           "member": "string",
           "name": "Region",
@@ -671,7 +671,7 @@
         },
         {
           "disabled": false,
-          "document": "Resource available zone.",
+          "document": "<p>Availability zone of resource</p>",
           "example": "Shanghai Zone 1",
           "member": "string",
           "name": "AvailabilityZone",
@@ -681,7 +681,7 @@
         },
         {
           "disabled": false,
-          "document": "Instance id.",
+          "document": "<p>Instance ID.</p>",
           "example": "disk-ekoob7ok",
           "member": "string",
           "name": "InstanceId",
@@ -691,7 +691,7 @@
         },
         {
           "disabled": false,
-          "document": "Instance name.",
+          "document": "<p>Instance name.</p>",
           "example": "HDD cloud",
           "member": "string",
           "name": "InstanceName",
@@ -701,7 +701,7 @@
         },
         {
           "disabled": false,
-          "document": "Sub-Product name\n.\n",
+          "document": "<p>Sub-product name</p>",
           "example": "HDD cloud block storage",
           "member": "string",
           "name": "SubProductName",
@@ -711,7 +711,7 @@
         },
         {
           "disabled": false,
-          "document": "Settlement type.",
+          "document": "<p>Settlement type</p>",
           "example": "Hourly settlement",
           "member": "string",
           "name": "TransactionType",
@@ -721,7 +721,7 @@
         },
         {
           "disabled": false,
-          "document": "<Transaction id>.",
+          "document": "<p>Transaction log ID</p>",
           "example": "20230228722000247298552",
           "member": "string",
           "name": "TransactionId",
@@ -731,7 +731,7 @@
         },
         {
           "disabled": false,
-          "document": "Settlement time.\n",
+          "document": "<p>Time of settlement</p>",
           "example": "2023-02-28 13:01:23",
           "member": "string",
           "name": "TransactionTime",
@@ -741,7 +741,7 @@
         },
         {
           "disabled": false,
-          "document": "<Resource start time>.",
+          "document": "<p>Resource usage start time</p>",
           "example": "2023-02-28 12:00:00",
           "member": "string",
           "name": "UsageStartTime",
@@ -751,7 +751,7 @@
         },
         {
           "disabled": false,
-          "document": "<Resource end usage time>.",
+          "document": "<p>Resource usage end time</p>",
           "example": "2023-02-28 12:59:59",
           "member": "string",
           "name": "UsageEndTime",
@@ -761,7 +761,7 @@
         },
         {
           "disabled": false,
-          "document": "Component.",
+          "document": "<p>Component</p>",
           "example": "volume size",
           "member": "string",
           "name": "ComponentType",
@@ -771,7 +771,7 @@
         },
         {
           "disabled": false,
-          "document": "Component name.",
+          "document": "<p>Component name</p>",
           "example": "HDD cloud block storage-volume size",
           "member": "string",
           "name": "ComponentName",
@@ -781,7 +781,7 @@
         },
         {
           "disabled": false,
-          "document": "Component list price.",
+          "document": "<p>Component list price</p>",
           "example": "0.00000003",
           "member": "string",
           "name": "ComponentListPrice",
@@ -791,7 +791,7 @@
         },
         {
           "disabled": false,
-          "document": "Price unit.",
+          "document": "<p>Price unit</p>",
           "example": "USD/GB/Second",
           "member": "string",
           "name": "ComponentPriceMeasurementUnit",
@@ -801,7 +801,7 @@
         },
         {
           "disabled": false,
-          "document": "Component usage.",
+          "document": "<p>Component usage</p>",
           "example": "250",
           "member": "string",
           "name": "ComponentUsage",
@@ -811,7 +811,7 @@
         },
         {
           "disabled": false,
-          "document": "Component usage unit.",
+          "document": "<p>Component usage unit</p>",
           "example": "GB",
           "member": "string",
           "name": "ComponentUsageUnit",
@@ -821,7 +821,7 @@
         },
         {
           "disabled": false,
-          "document": "Resource usage duration.",
+          "document": "<p>Resource usage duration</p>",
           "example": "478",
           "member": "string",
           "name": "UsageDuration",
@@ -831,7 +831,7 @@
         },
         {
           "disabled": false,
-          "document": "duration unit.",
+          "document": "<p>Duration unit</p>",
           "example": "Second",
           "member": "string",
           "name": "DurationUnit",
@@ -841,7 +841,7 @@
         },
         {
           "disabled": false,
-          "document": "Total original price.\nOriginal cost = component list price * component usage * usage duration.",
+          "document": "<p>Original total price<br>Original Cost = Component List Price * Component Usage * Usage Duration</p>",
           "example": "0.003585",
           "member": "string",
           "name": "OriginalCost",
@@ -851,7 +851,7 @@
         },
         {
           "disabled": false,
-          "document": "Discount (default is 1) - abandoned.",
+          "document": "<p>Discount (default: 1) - abandoned</p>",
           "example": "1",
           "member": "string",
           "name": "DiscountRate",
@@ -861,7 +861,7 @@
         },
         {
           "disabled": false,
-          "document": "Currency.",
+          "document": "<p>Currency.</p>",
           "example": "USD",
           "member": "string",
           "name": "Currency",
@@ -871,7 +871,7 @@
         },
         {
           "disabled": false,
-          "document": "Total cost after discount.",
+          "document": "<p>Total cost after discount</p>",
           "example": "0.003585",
           "member": "string",
           "name": "TotalAmountAfterDiscount",
@@ -881,7 +881,7 @@
         },
         {
           "disabled": false,
-          "document": "Voucher deduction amount.",
+          "document": "<p>Voucher deducted amount</p>",
           "example": "0",
           "member": "string",
           "name": "VoucherDeduction",
@@ -891,7 +891,7 @@
         },
         {
           "disabled": false,
-          "document": "= Total Amount After Discount - Voucher Deduction",
+          "document": "<p>= Total Amount After Discount - Voucher Deduction</p>",
           "example": "0.003585",
           "member": "string",
           "name": "TotalCost",
@@ -901,7 +901,7 @@
         },
         {
           "disabled": false,
-          "document": "Identifier (id).",
+          "document": "<p>id</p>",
           "example": "4998689516778477313",
           "member": "string",
           "name": "Id",
@@ -911,10 +911,50 @@
         },
         {
           "disabled": false,
-          "document": "customer discount rate. The discount rate applied to the reseller's customer, which set by reseller, default value equal to 1.",
+          "document": "<p>customer discount rate. The discount rate for customers of resellers, set by the reseller. The default value is 1.</p>",
           "example": "1",
           "member": "string",
           "name": "CustomerDiscountRate",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Product code</p>",
+          "example": "p_cbs",
+          "member": "string",
+          "name": "BusinessCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Sub-product code</p>",
+          "example": "sp_cbs_premium",
+          "member": "string",
+          "name": "ProductCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Component type code</p>",
+          "example": "v_cbs_memspace",
+          "member": "string",
+          "name": "ComponentCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Component code</p>",
+          "example": "sv_cbs_memspace_premium",
+          "member": "string",
+          "name": "ItemCode",
           "output_required": false,
           "type": "string",
           "value_allowed_null": false
@@ -1654,7 +1694,7 @@
         },
         {
           "disabled": false,
-          "document": "Billing mode\n.\nMonthly subscription.\nPay-As-You-Go resources.\nStandard ri reserved instances.",
+          "document": "Billing mode\n.\nyearly/monthly subscription.\nPay-As-You-Go resources.\nStandard ri reserved instances.",
           "example": "Pay-As-You-Go resources",
           "member": "string",
           "name": "BillingMode",
@@ -1685,7 +1725,7 @@
         {
           "disabled": false,
           "document": "Resource availability zone.",
-          "example": "Singapore Zone ",
+          "example": "Singapore Zone",
           "member": "string",
           "name": "AvailabilityZone",
           "output_required": true,
@@ -1895,11 +1935,51 @@
         {
           "disabled": false,
           "document": "Tag information.",
-          "example": "[\"tagKey\": \"1\", \"tagValue\":\"2\"]",
+          "example": "无",
           "member": "TagInfo",
           "name": "Tags",
           "output_required": false,
           "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Product code",
+          "example": "p_cbs",
+          "member": "string",
+          "name": "BusinessCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Subproduct code",
+          "example": "sp_cbs_premium",
+          "member": "string",
+          "name": "ProductCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Component type code",
+          "example": "v_cbs_memspace",
+          "member": "string",
+          "name": "ComponentCode",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Component code",
+          "example": "sv_cbs_memspace_premium",
+          "member": "string",
+          "name": "ItemCode",
+          "output_required": false,
+          "type": "string",
           "value_allowed_null": false
         }
       ],
@@ -1910,7 +1990,7 @@
       "members": [
         {
           "disabled": false,
-          "document": "Inquiry month, in the format of YYYY-MM, such as 2023-01",
+          "document": "<p>Query month, in the format of YYYY-MM, such as 2023-01</p>",
           "example": "2023-04",
           "member": "string",
           "name": "Month",
@@ -1919,7 +1999,7 @@
         },
         {
           "disabled": false,
-          "document": "Page parameter: number of entries per page. Value range: [1, 200]",
+          "document": "<p>Page parameter: number of entries per page. Value range: [1, 200]</p>",
           "example": "20",
           "member": "int64",
           "name": "PageSize",
@@ -1928,7 +2008,7 @@
         },
         {
           "disabled": false,
-          "document": "Page parameter: current page number. The minimum value is 1.",
+          "document": "<p>Page parameter: current page number. The minimum value is 1.</p>",
           "example": "1",
           "member": "int64",
           "name": "Page",
@@ -1937,7 +2017,7 @@
         },
         {
           "disabled": false,
-          "document": "Billing mode. Valid values: prePay (Monthly subscription) and postPay (Pay-As-You-Go resources)",
+          "document": "<p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>",
           "example": "postPay",
           "member": "string",
           "name": "PayMode",
@@ -1946,7 +2026,7 @@
         },
         {
           "disabled": false,
-          "document": "Transaction type. Valid values: prepay_purchase (Purchase), prepay_renew (Renewal), prepay_modify (Upgrade/Downgrade), prepay_return ( Monthly subscription refund), postpay_deduct (Pay-as-you-go), postpay_deduct_h (Hourly settlement), postpay_deduct_d (Daily settlement), postpay_deduct_m (Monthly settlement), offline_deduct (Offline project deduction), online_deduct (Offline product deduction), recon_deduct (Adjustment - deduction), recon_increase (Adjustment - compensation), ripay_purchase (One-off RI Fee), postpay_deduct_s (Spot), ri_hour_pay (Hourly RI fee), prePurchase (New monthly subscription), preRenew (Monthly subscription renewal), preUpgrade (Upgrade/Downgrade), preDowngrade (Upgrade/Downgrade), svp_hour_pay (Hourly Savings Plan fee), recon_guarantee (Minimum spend deduction), pre_purchase (New monthly subscription), pre_renew (Monthly subscription renewal), pre_upgrade (Upgrade/Downgrade), pre_downgrade (Upgrade/Downgrade)",
+          "document": "<p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew:  Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>",
           "example": "postpay_deduct_h",
           "member": "string",
           "name": "ActionType",
@@ -1961,8 +2041,8 @@
       "members": [
         {
           "disabled": false,
-          "document": "Data details.",
-          "example": "[...]",
+          "document": "<p>Data details</p>",
+          "example": "无",
           "member": "CustomerBillDetailData",
           "name": "DetailSet",
           "output_required": false,
@@ -1971,7 +2051,7 @@
         },
         {
           "disabled": false,
-          "document": "Total number of entries.",
+          "document": "<p>Total quantity.</p>",
           "example": "1",
           "member": "int64",
           "name": "Total",
@@ -2288,8 +2368,8 @@
       "members": [
         {
           "disabled": false,
-          "document": "Sub-account UIN.",
-          "example": "123456",
+          "document": "<p>Sub-customer uin</p>",
+          "example": "800000448824",
           "member": "uint64",
           "name": "CustomerUin",
           "required": true,
@@ -2297,7 +2377,7 @@
         },
         {
           "disabled": false,
-          "document": "Inquiry month, in the format of YYYY-MM, such as 2023-01.",
+          "document": "<p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>",
           "example": "2023-02",
           "member": "string",
           "name": "Month",
@@ -2306,7 +2386,7 @@
         },
         {
           "disabled": false,
-          "document": "Page parameter: number of entries per page. Value range: [1, 200]",
+          "document": "<p>Pagination parameter: entries per page. Value range: [1, 200]</p>",
           "example": "1",
           "member": "int64",
           "name": "PageSize",
@@ -2315,7 +2395,7 @@
         },
         {
           "disabled": false,
-          "document": "Page parameter: current page number. The minimum value is 1.",
+          "document": "<p>Pagination parameter: current page number. The minimum value is 1.</p>",
           "example": "10",
           "member": "int64",
           "name": "Page",
@@ -2324,7 +2404,7 @@
         },
         {
           "disabled": false,
-          "document": "Billing mode. Valid values:\nprePay (Monthly subscription)\npostPay (Pay-As-You-Go resources)",
+          "document": "<p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>",
           "example": "prePay",
           "member": "string",
           "name": "PayMode",
@@ -2333,7 +2413,7 @@
         },
         {
           "disabled": false,
-          "document": "Transaction type. Valid values:\nprepay_purchase (Purchase)\nprepay_renew (Renewal)\nprepay_modify (Upgrade/Downgrade)\nprepay_return ( Monthly subscription refund)\npostpay_deduct (Pay-as-you-go)\npostpay_deduct_h (Hourly settlement)\npostpay_deduct_d (Daily settlement)\npostpay_deduct_m (Monthly settlement)\noffline_deduct (Offline project deduction)\nonline_deduct (Offline product deduction)\nrecon_deduct (Adjustment - deduction)\nrecon_increase (Adjustment - compensation)\nripay_purchase (One-off RI Fee)\npostpay_deduct_s (Spot)\nri_hour_pay (Hourly RI fee)\nprePurchase (New monthly subscription)\npreRenew (Monthly subscription renewal)\npreUpgrade (Upgrade/Downgrade)\npreDowngrade (Upgrade/Downgrade)\nsvp_hour_pay (Hourly Savings Plan fee)\nrecon_guarantee (Minimum spend deduction)\npre_purchase (New monthly subscription)\npre_renew (Monthly subscription renewal)\npre_upgrade (Upgrade/Downgrade)\npre_downgrade (Upgrade/Downgrade)",
+          "document": "<p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>",
           "example": "pre_upgrade",
           "member": "string",
           "name": "ActionType",
@@ -2342,7 +2422,7 @@
         },
         {
           "disabled": false,
-          "document": "Payment status\n0: not distinguished\n1: paid\n2: unpaid",
+          "document": "<p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>",
           "example": "1",
           "member": "string",
           "name": "IsConfirmed",
@@ -2357,7 +2437,7 @@
       "members": [
         {
           "disabled": false,
-          "document": "Total number of data entries",
+          "document": "<p>total number of records</p>",
           "example": "10",
           "member": "int64",
           "name": "Total",
@@ -2367,13 +2447,13 @@
         },
         {
           "disabled": false,
-          "document": "Data detailsNote: This field may return null, indicating that no valid values can be obtained.",
-          "example": "{...}",
+          "document": "<p>Data details</p>",
+          "example": "无",
           "member": "BillDetailData",
           "name": "DetailSet",
-          "output_required": true,
+          "output_required": false,
           "type": "list",
-          "value_allowed_null": true
+          "value_allowed_null": false
         },
         {
           "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
@@ -2472,8 +2552,8 @@
       "members": [
         {
           "disabled": false,
-          "document": "Customer UIN",
-          "example": "123456",
+          "document": "<p>Sub-customer uin</p>",
+          "example": "800000400309",
           "member": "uint64",
           "name": "CustomerUin",
           "required": true,
@@ -2481,7 +2561,7 @@
         },
         {
           "disabled": false,
-          "document": "The queried month in \"YYYY-MM\" format, such as 2023-01.",
+          "document": "<p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>",
           "example": "2023-02",
           "member": "string",
           "name": "Month",
@@ -2490,7 +2570,7 @@
         },
         {
           "disabled": false,
-          "document": "Billing mode. Valid values:\n`prePay` (Monthly subscription)\n`postPay` (Pay-as-you-go)",
+          "document": "<p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>",
           "example": "prePay",
           "member": "string",
           "name": "PayMode",
@@ -2499,7 +2579,7 @@
         },
         {
           "disabled": false,
-          "document": "Transaction type. Valid values:\n`prepay_purchase` (Purchase)\n`prepay_renew` (Renewal)\n`prepay_modify` (Upgrade/Downgrade)\n`prepay_return` (Monthly subscription refund)\n`postpay_deduct` (Pay-as-you-go)\n`postpay_deduct_h` (Hourly settlement)\n`postpay_deduct_d` (Daily settlement)\n`postpay_deduct_m` (Monthly settlement)\n`offline_deduct` (Offline project deduction)\n`online_deduct` (Offline product deduction)\n`recon_deduct` (Adjustment - deduction)\n`recon_increase` (Adjustment - compensation)\n`ripay_purchase` (One-off RI Fee)\n`postpay_deduct_s` (Spot)\n`ri_hour_pay` (Hourly RI fee)\n`prePurchase` (New monthly subscription)\n`preRenew` (Monthly subscription renewal)\n`preUpgrade` (Upgrade/Downgrade)\n`preDowngrade` (Upgrade/Downgrade)\n`svp_hour_pay` (Hourly Savings Plan fee)\n`recon_guarantee` (Minimum spend deduction)\n`pre_purchase` (New monthly subscription)\n`pre_renew` (Monthly subscription renewal)\n`pre_upgrade` (Upgrade/Downgrade)\n`pre_downgrade` (Upgrade/Downgrade)",
+          "document": "<p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li></ul>",
           "example": "pre_upgrade",
           "member": "string",
           "name": "ActionType",
@@ -2508,7 +2588,7 @@
         },
         {
           "disabled": false,
-          "document": "Payment status\n`0`: N/A\n`1`: Paid\n`2`: Unpaid",
+          "document": "<p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>",
           "example": "1",
           "member": "string",
           "name": "IsConfirmed",
@@ -2523,10 +2603,11 @@
       "members": [
         {
           "disabled": false,
-          "document": "Total amount",
+          "document": "<p>Total amount</p>",
           "example": "123.45",
           "member": "float",
           "name": "TotalCost",
+          "output_required": true,
           "type": "float",
           "value_allowed_null": false
         },

@@ -21,6 +21,20 @@
       "output": "CreateGlossaryEntriesResponse",
       "status": "online"
     },
+    "CreateTokenPlanApiKeys": {
+      "document": "Batch create TokenPlan API Keys.\n\nImport a name prefix and quantity to automatically generate names in the `{Api Key Name}-{serial number}` format (for example, aaa-1, aaa-2). Duplicate names are allowed. Partial success is supported for up to 100 entries.",
+      "input": "CreateTokenPlanApiKeysRequest",
+      "name": "Batch creates API Keys for the Token Plan package",
+      "output": "CreateTokenPlanApiKeysResponse",
+      "status": "online"
+    },
+    "CreateTokenPlanTeamOrderAndBuy": {
+      "document": "Purchase a package (This API is also used to reactivate and renew expired packages. The teamId of the expired package is required. After the renewal is successful, the total cycle count of the package will include historical cycles. The actual effective cycle of the package is determined by the effective time and expiration time.)\n\nInitiate an order for a TokenPlan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.",
+      "input": "CreateTokenPlanTeamOrderAndBuyRequest",
+      "name": "Creates or reactivates a Token Plan package",
+      "output": "CreateTokenPlanTeamOrderAndBuyResponse",
+      "status": "online"
+    },
     "DeleteApiKey": {
       "document": "This API is used to delete specified api keys and clean up associated model binding relationships.",
       "input": "DeleteApiKeyRequest",
@@ -40,6 +54,13 @@
       "input": "DeleteGlossaryEntriesRequest",
       "name": "Delete terminology entries in batches",
       "output": "DeleteGlossaryEntriesResponse",
+      "status": "online"
+    },
+    "DeleteTokenPlanApiKey": {
+      "document": "Delete the Token Plan API key.\n\nSimultaneously delete the limit center sub-limit package and notify the Notification Gateway to purge cache.",
+      "input": "DeleteTokenPlanApiKeyRequest",
+      "name": "Deletes the API Key of the Token Plan package",
+      "output": "DeleteTokenPlanApiKeyResponse",
       "status": "online"
     },
     "DescribeApiKey": {
@@ -70,6 +91,48 @@
       "output": "DescribeGlossaryEntriesResponse",
       "status": "online"
     },
+    "DescribeTokenPlan": {
+      "document": "Query the TokenPlan package details.\n\nReturn the package basic info and the remaining quota of the package.",
+      "input": "DescribeTokenPlanRequest",
+      "name": "Queries Token Plan package details",
+      "output": "DescribeTokenPlanResponse",
+      "status": "online"
+    },
+    "DescribeTokenPlanApiKey": {
+      "document": "Query TokenPlan APIKey details.\n\nReturn the complete APIKey information (including the plaintext key) and the remaining quota of the sub-quota package.",
+      "input": "DescribeTokenPlanApiKeyRequest",
+      "name": "Queries the API Key details of a Token Plan package",
+      "output": "DescribeTokenPlanApiKeyResponse",
+      "status": "online"
+    },
+    "DescribeTokenPlanApiKeyList": {
+      "document": "Query the list of Token Plan API keys.\n\nReturns the API key list under a specified package. Keys are masked. Root accounts can view all keys, while sub-accounts can only view keys created by themselves.",
+      "input": "DescribeTokenPlanApiKeyListRequest",
+      "name": "Queries the API Key list of a Token Plan package",
+      "output": "DescribeTokenPlanApiKeyListResponse",
+      "status": "online"
+    },
+    "DescribeTokenPlanApiKeySecret": {
+      "document": "Query the TokenPlan APIKey (plaintext).\n\nReturn the plaintext key value of the designated APIKey. Keep it safe.",
+      "input": "DescribeTokenPlanApiKeySecretRequest",
+      "name": "Queries the API Key (plaintext) of a Token Plan package",
+      "output": "DescribeTokenPlanApiKeySecretResponse",
+      "status": "online"
+    },
+    "DescribeTokenPlanApiKeyUsageDetail": {
+      "document": "Query the Token Plan APIKey call detail.\n\nThis API is used to query call details under a package from CLS log service, filter by team_id, and support cursor-based pagination.",
+      "input": "DescribeTokenPlanApiKeyUsageDetailRequest",
+      "name": "Queries the call details of the Token Plan enterprise edition API Key",
+      "output": "DescribeTokenPlanApiKeyUsageDetailResponse",
+      "status": "online"
+    },
+    "DescribeTokenPlanList": {
+      "document": "Query the list of Token Plan package options.\n\nSupports pagination, filtering, and sorting. Root accounts can view all packages, while sub-accounts can only view packages created by themselves. Returned results include the main limit package details associated with each package in the limit center.",
+      "input": "DescribeTokenPlanListRequest",
+      "name": "Queries the list of Token Plan package options",
+      "output": "DescribeTokenPlanListResponse",
+      "status": "online"
+    },
     "ModifyApiKeyInfo": {
       "document": "Refresh API key information.\n\nThis API is used to update the remark information, IP allowlist and Token quota of an API key (recommended to use QuotaDesired parameter for quota modification). Passing no optional parameters means no modification.",
       "input": "ModifyApiKeyInfoRequest",
@@ -89,6 +152,34 @@
       "input": "ModifyGlossaryEntriesRequest",
       "name": "Batch modify terminology entries",
       "output": "ModifyGlossaryEntriesResponse",
+      "status": "online"
+    },
+    "ModifyTokenPlanApiKey": {
+      "document": "Modify the Token Plan APIKey configuration (field that the gateway focuses on).\n\nAfter modification, automatically notify the gateway to update the cache and sync the limit center.",
+      "input": "ModifyTokenPlanApiKeyRequest",
+      "name": "Modifies the API Key configuration of the Token Plan package",
+      "output": "ModifyTokenPlanApiKeyResponse",
+      "status": "online"
+    },
+    "ModifyTokenPlanApiKeySecret": {
+      "document": "Reset the TokenPlan API Key.\n\nRegenerate the key value. The key version increments and the old key expires immediately. The API Key ID remains unchanged. After resetting, the new key can be queried through DescribeTokenPlanApiKeySecret.",
+      "input": "ModifyTokenPlanApiKeySecretRequest",
+      "name": "Reset the API Key of the Token Plan package",
+      "output": "ModifyTokenPlanApiKeySecretResponse",
+      "status": "online"
+    },
+    "RenewTokenPlanTeamOrder": {
+      "document": "Renew a package.\n\nInitiate a renewal order for an existing Token Plan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.",
+      "input": "RenewTokenPlanTeamOrderRequest",
+      "name": "Renews a Token Plan package",
+      "output": "RenewTokenPlanTeamOrderResponse",
+      "status": "online"
+    },
+    "UpgradeTokenPlanTeamOrder": {
+      "document": "Upgrade the package.\n\nInitiate an upgrade order for an existing Token Plan package and complete payment to expand point or token limits. Return the order ID and associated sub-orders and resource information upon success. The new limit must be greater than the current limit.",
+      "input": "UpgradeTokenPlanTeamOrderRequest",
+      "name": "Upgrades a Token Plan package",
+      "output": "UpgradeTokenPlanTeamOrderResponse",
       "status": "online"
     }
   },
@@ -284,6 +375,42 @@
       ],
       "usage": "out"
     },
+    "BatchCreateFailedItem": {
+      "document": "Batch create failed items",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Serial number of the failed item (starting from 1, corresponding to the suffix number).",
+          "example": "1",
+          "member": "int64",
+          "name": "Index",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Name of the failed item.",
+          "example": "aaa-1-x7k2m9",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Failure reason.",
+          "example": "create sub package failed",
+          "member": "string",
+          "name": "Reason",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
     "BindingItem": {
       "document": "Bind Resource",
       "members": [
@@ -339,6 +466,22 @@
         }
       ],
       "type": "object"
+    },
+    "CreateApiKeysResultItem": {
+      "document": "Batch create succeeded items",
+      "members": [
+        {
+          "disabled": false,
+          "document": "APIKey ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
     },
     "CreateGlossaryEntriesRequest": {
       "document": "CreateGlossaryEntries request structure.",
@@ -470,6 +613,189 @@
       ],
       "type": "object"
     },
+    "CreateTokenPlanApiKeysRequest": {
+      "document": "CreateTokenPlanApiKeys request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID. You can obtain it through the DescribeTokenPlanList API.",
+          "example": "tp-ent-a1b2c3d4",
+          "member": "string",
+          "name": "TeamId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "API key name, up to 128 characters. If the number of API keys created exceeds 1, the actual name format is {ApiKeyName}-{serial number} (for example, mykey-1, mykey-2).",
+          "example": "生产Key",
+          "member": "string",
+          "name": "ApiKeyName",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Number of creations. Value range: 1–10.",
+          "example": "5",
+          "member": "int64",
+          "name": "Count",
+          "required": true,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "List of available models. If the package type is the enterprise edition professional package, you can specify a model or pass in \"all\". \"all\" means all models supported by the package are available for use. To specify specific models, pass in Model IDs. \"all\" and specific Model IDs cannot be specified at the same time. If not provided, it indicates the API Key does not support any models, thereby impacting normal use of the API Key. If the package type is the enterprise edition lite package, this field will be force overwritten to [\"auto\"] regardless of whether it is provided and what value is passed in.",
+          "example": "[\"glm-5\",\"kimi-k2.5\"]",
+          "member": "string",
+          "name": "AllowedModels",
+          "required": false,
+          "type": "list"
+        },
+        {
+          "disabled": false,
+          "document": "Exclusive reserved quota. If not passed in, the value is `0`, which means no exclusive reserved quota is assigned to the API Key. Measurement units are as follows:\n-Package type is professional, unit value is points;\n-Package type is lite package, and the measurement unit is token.",
+          "example": "500000",
+          "member": "int64",
+          "name": "ExclusiveQuota",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no upper limit is set. The units are as follows:\n-Package type is professional, unit value is points;\n-Package type is lite package, and the measurement unit is token.",
+          "example": "-1",
+          "member": "int64",
+          "name": "TotalQuota",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "TPM (Tokens Per Minute) limit. If not passed, the plan-level TPM is used. Must be >= 0 and <= the package TPM.",
+          "example": "4400",
+          "member": "int64",
+          "name": "TPM",
+          "required": false,
+          "type": "int"
+        }
+      ],
+      "type": "object"
+    },
+    "CreateTokenPlanApiKeysResponse": {
+      "document": "CreateTokenPlanApiKeys response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Item list of successful creation.",
+          "example": "无",
+          "member": "CreateApiKeysResultItem",
+          "name": "Items",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Item list that failed to be created.",
+          "example": "无",
+          "member": "BatchCreateFailedItem",
+          "name": "FailedItems",
+          "output_required": false,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "CreateTokenPlanTeamOrderAndBuyRequest": {
+      "document": "CreateTokenPlanTeamOrderAndBuy request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Package type. Value: enterprise (enterprise edition professional package), enterprise-auto (enterprise edition lite package).</p>",
+          "example": "enterprise",
+          "member": "string",
+          "name": "ProductType",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Package name. It can only contain Chinese, letters, digits, underscores, and hyphens. It must start with a Chinese character or a letter and end with a Chinese character, letter, or digit. The length should be 2-50 characters.</p>",
+          "example": "my-token-plan",
+          "member": "string",
+          "name": "TeamName",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Purchase duration. Unit: Month. It must be greater than 0, supporting 1 to 12 months.</p>",
+          "example": "1",
+          "member": "int64",
+          "name": "TimeSpan",
+          "required": true,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Specification of the purchased package. If the package type is enterprise, the measurement unit is point; if the package type is enterprise-auto, the measurement unit is tokens.</p>",
+          "example": "1000000",
+          "member": "int64",
+          "name": "CreditOrToken",
+          "required": true,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Whether to enable auto-renewal. Not enabled by default.</p>",
+          "example": "false",
+          "member": "bool",
+          "name": "EnableAutoRenew",
+          "required": false,
+          "type": "bool"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Existing package ID (if not empty, the renewal process is performed; if empty, a new purchase is performed)</p>",
+          "example": "tp-ent-xxxxxx",
+          "member": "string",
+          "name": "TeamId",
+          "required": false,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "CreateTokenPlanTeamOrderAndBuyResponse": {
+      "document": "CreateTokenPlanTeamOrderAndBuy response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Tencent Cloud order ID. Used to associate all sub-orders under a purchase operation.</p>",
+          "example": "20260101000000000000001",
+          "member": "string",
+          "name": "BigOrderId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
     "DeleteApiKeyRequest": {
       "document": "DeleteApiKey request structure.",
       "members": [],
@@ -555,6 +881,33 @@
     },
     "DeleteGlossaryResponse": {
       "document": "DeleteGlossary response structure.",
+      "members": [
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DeleteTokenPlanApiKeyRequest": {
+      "document": "DeleteTokenPlanApiKey request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DeleteTokenPlanApiKeyResponse": {
+      "document": "DeleteTokenPlanApiKey response structure.",
       "members": [
         {
           "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
@@ -1052,6 +1405,461 @@
       ],
       "type": "object"
     },
+    "DescribeTokenPlanApiKeyListRequest": {
+      "document": "DescribeTokenPlanApiKeyList request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID. You can obtain it through the DescribeTokenPlanList API.",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Offset of paginated query. Default value: 0.",
+          "example": "0",
+          "member": "int64",
+          "name": "Offset",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Number of results returned by paging query. Default value: 20. Maximum value: 100.",
+          "example": "20",
+          "member": "int64",
+          "name": "Limit",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Paginate the list of query filter criteria. Supported filter fields: ApiKeyId (API Key ID), Name (API Key name), Status (whether the API Key is available), StopReason (reason for disabling the API Key), UseStatus (API Key user-side switch).",
+          "example": "无",
+          "member": "RequestFilter",
+          "name": "Filters",
+          "required": false,
+          "type": "list"
+        },
+        {
+          "disabled": false,
+          "document": "Paginate the list of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.",
+          "example": "无",
+          "member": "RequestSort",
+          "name": "Sorts",
+          "required": false,
+          "type": "list"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeyListResponse": {
+      "document": "DescribeTokenPlanApiKeyList response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key list.",
+          "example": "无",
+          "member": "TokenPlanApiKeyListItem",
+          "name": "ApiKeySet",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Total number of API Keys.",
+          "example": "1",
+          "member": "int64",
+          "name": "TotalCount",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeyRequest": {
+      "document": "DescribeTokenPlanApiKey request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeyResponse": {
+      "document": "DescribeTokenPlanApiKey response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key details.",
+          "example": "无",
+          "member": "TokenPlanApiKeyInfo",
+          "name": "ApiKey",
+          "output_required": true,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key limit and usage information.",
+          "example": "无",
+          "member": "SubPackageBalance",
+          "name": "Balance",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeySecretRequest": {
+      "document": "DescribeTokenPlanApiKeySecret request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeySecretResponse": {
+      "document": "DescribeTokenPlanApiKeySecret response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "APIKey ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "APIKey key value (plaintext). Keep it safe.",
+          "example": "sk-tp-GCgjOgMSzNpMXZ8UxKyJR5rICMTNHwFe",
+          "member": "string",
+          "name": "ApiKey",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeyUsageDetailRequest": {
+      "document": "DescribeTokenPlanApiKeyUsageDetail request structure.",
+      "members": [],
+      "type": "object"
+    },
+    "DescribeTokenPlanApiKeyUsageDetailResponse": {
+      "document": "DescribeTokenPlanApiKeyUsageDetail response structure.",
+      "members": [
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanListRequest": {
+      "document": "DescribeTokenPlanList request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Offset of paginated query. Default value: 0.",
+          "example": "0",
+          "member": "int64",
+          "name": "Offset",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Number of results returned by paging query. Default value: 20. Maximum value: 100.",
+          "example": "20",
+          "member": "int64",
+          "name": "Limit",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Paginate the query filter criteria list. Supported filter fields: TeamId (Package ID), Name (package name), StopReason (disable reason), ProductType (package type).",
+          "example": "无",
+          "member": "RequestFilter",
+          "name": "Filters",
+          "required": false,
+          "type": "list"
+        },
+        {
+          "disabled": false,
+          "document": "List of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.",
+          "example": "无",
+          "member": "RequestSort",
+          "name": "Sorts",
+          "required": false,
+          "type": "list"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanListResponse": {
+      "document": "DescribeTokenPlanList response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "List of package options.",
+          "example": "无",
+          "member": "TokenPlanListItem",
+          "name": "TokenPlanSet",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Total number of packages.",
+          "example": "1",
+          "member": "int64",
+          "name": "TotalCount",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanRequest": {
+      "document": "DescribeTokenPlan request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID. You can obtain it through the DescribeTokenPlanList API.",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeTokenPlanResponse": {
+      "document": "DescribeTokenPlan response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package name.",
+          "example": "生产环境套餐",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Root account APP ID.",
+          "example": "1300000001",
+          "member": "string",
+          "name": "AppId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Main account UIN.",
+          "example": "100000000001",
+          "member": "string",
+          "name": "Uin",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Status. Valid values: enable, disable.",
+          "example": "enable",
+          "member": "string",
+          "name": "Status",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Disablement reason. Value: NORMAL, ISOLATED, FROZEN, EXHAUSTED, DESTROYED.",
+          "example": "none",
+          "member": "string",
+          "name": "StopReason",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Maximum number of API Keys that can be created.",
+          "example": "1000",
+          "member": "int64",
+          "name": "ApiKeyMax",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Cloud billing prepaid resource package ID.",
+          "example": "pre-abc12345",
+          "member": "string",
+          "name": "PrepayResourceID",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creator. Packages created by a sub-account show the sub-account UIN.",
+          "example": "100000000002",
+          "member": "string",
+          "name": "Creator",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creation time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "CreatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Update time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "UpdatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Basic information of the package.",
+          "example": "无",
+          "member": "TokenPlanPackageInfo",
+          "name": "PackageInfo",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Auto-renewal flag. Value: 0 (manual renewal), 1 (auto renewal), 2 (no automatic renewal). It is not returned if not bound to a prepaid resource.",
+          "example": "1",
+          "member": "int64",
+          "name": "AutoRenewFlag",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Current number of created API Keys.",
+          "example": "5",
+          "member": "int64",
+          "name": "ApiKeyCount",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Token usage details in the current cycle",
+          "example": "无",
+          "member": "TokenSummary",
+          "name": "TokenSummary",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)",
+          "example": "enterprise",
+          "member": "string",
+          "name": "ProductType",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
     "GlossaryEntryInput": {
       "document": "Create terminology entry",
       "members": [
@@ -1311,6 +2119,125 @@
       ],
       "usage": "in"
     },
+    "ModifyTokenPlanApiKeyRequest": {
+      "document": "ModifyTokenPlanApiKey request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Available model list. If this parameter is not specified, no modification is made.\n\n- If the package type is enterprise professional:\n1) Input \"all\": use all models supported by the package\n2) Import Model ID: specify a specific model. \"all\" and a specific Model ID cannot be specified at the same time.\n\n-If the package type is enterprise lightweight edition, do not pass in this parameter.",
+          "example": "[\"glm-5\",\"kimi-k2.5\"]",
+          "member": "string",
+          "name": "AllowedModels",
+          "required": false,
+          "type": "list"
+        },
+        {
+          "disabled": false,
+          "document": "Dedicated limit. If this parameter is not specified, no modification will be made. Unit:\n\n-Package type: professional. Measurement unit: point.\n- Package type is lite package, and the measurement unit is token.",
+          "example": "500000",
+          "member": "int64",
+          "name": "ExclusiveQuota",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no modification is made. Measurement units are as follows:\n-Package type: professional. Measurement unit: point.\n- Package type is lite package, and the measurement unit is token.",
+          "example": "-1",
+          "member": "int64",
+          "name": "TotalQuota",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "Whether to enable the API Key. Values: enable (enable), disable (disable). If not passed, no modification is made.",
+          "example": "enable",
+          "member": "string",
+          "name": "UseStatus",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "TPM (Tokens Per Minute) limit. If not passed, no modification will be made. Must be >= 0 and <= the package TPM.",
+          "example": "4400",
+          "member": "int64",
+          "name": "TPM",
+          "required": false,
+          "type": "int"
+        }
+      ],
+      "type": "object"
+    },
+    "ModifyTokenPlanApiKeyResponse": {
+      "document": "ModifyTokenPlanApiKey response structure.",
+      "members": [
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "ModifyTokenPlanApiKeySecretRequest": {
+      "document": "ModifyTokenPlanApiKeySecret request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
+    "ModifyTokenPlanApiKeySecretResponse": {
+      "document": "ModifyTokenPlanApiKeySecret response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Key version after resetting.",
+          "example": "2",
+          "member": "int64",
+          "name": "KeyVersion",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
     "QuotaInfo": {
       "document": "Token quota information",
       "members": [
@@ -1387,13 +2314,59 @@
       ],
       "usage": "out"
     },
+    "RenewTokenPlanTeamOrderRequest": {
+      "document": "RenewTokenPlanTeamOrder request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID, which can be obtained through the DescribeTokenPlanList API.",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Renewal duration. Unit: month. Must be greater than 0.",
+          "example": "1",
+          "member": "int64",
+          "name": "TimeSpan",
+          "required": true,
+          "type": "int"
+        }
+      ],
+      "type": "object"
+    },
+    "RenewTokenPlanTeamOrderResponse": {
+      "document": "RenewTokenPlanTeamOrder response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Tencent Cloud order ID. Used to associate all sub-orders under a renewal operation.",
+          "example": "20260101000000000000001",
+          "member": "string",
+          "name": "BigOrderId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
     "RequestFilter": {
       "document": "Filter criteria",
       "members": [
         {
           "disabled": false,
           "document": "Filter field name.",
-          "example": "Brand",
+          "example": "ResourceType",
           "member": "string",
           "name": "Name",
           "required": true,
@@ -1411,7 +2384,7 @@
         {
           "disabled": false,
           "document": "Filter value list. Supports up to 10.",
-          "example": "[\"Tencent\"]",
+          "example": "[\"model\"]",
           "member": "string",
           "name": "Values",
           "required": true,
@@ -1426,7 +2399,7 @@
         {
           "disabled": false,
           "document": "Sorting field name.",
-          "example": "RecommendWeight",
+          "example": "CreatedAt",
           "member": "string",
           "name": "Name",
           "required": true,
@@ -1443,6 +2416,844 @@
         }
       ],
       "usage": "in"
+    },
+    "SubPackageBalance": {
+      "document": "API Key limit and usage information",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Dedicated limit. Units are as follows:\n-Package type: professional. Measurement unit: point.\n- Package type is lite package, and the measurement unit is token.",
+          "example": "500000",
+          "member": "string",
+          "name": "ExclusiveQuota",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Used amount of the dedicated limit. The measurement units are as follows:\n-Package type: professional. Measurement unit: point.\n- Package type is lite package, and the measurement unit is token.",
+          "example": "100000",
+          "member": "string",
+          "name": "ExclusiveUsed",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Remaining exclusive quota. Units are as follows:\n-Package type: professional. Measurement unit: point.\n-Package type: lite package. Measurement unit: token.",
+          "example": "400000",
+          "member": "string",
+          "name": "ExclusiveRemain",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Shared credit limit. -1 means unlimited. Measurement units are as follows:\n-Package type is professional package, measurement unit value is point;\n-Package type: lite package. Measurement unit: token.",
+          "example": "-1",
+          "member": "string",
+          "name": "SharedQuota",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Used amount of the shared quota. Measurement units are as follows:\n-Package type is professional package, measurement unit value is point;\n-Package type: lite package. Measurement unit: token.",
+          "example": "50000",
+          "member": "string",
+          "name": "SharedUsed",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Remaining shared quota. Units are described as follows:\n-Package type is professional package, measurement unit value is point;\n-Package type: lite package. Measurement unit: token.",
+          "example": "-1",
+          "member": "string",
+          "name": "SharedRemain",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key package status. Valid values: 0 (normal), 1 (exhausted).",
+          "example": "0",
+          "member": "int64",
+          "name": "Status",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenPlanApiKeyInfo": {
+      "document": "Token Plan API Key details",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key secret key value (masked).",
+          "example": "sk-tp-xxxxxxxx",
+          "member": "string",
+          "name": "ApiKey",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key name.",
+          "example": "生产环境主Key",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Bundle ID.",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Account APP ID.",
+          "example": "1300000001",
+          "member": "string",
+          "name": "AppId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Main account UIN.",
+          "example": "100000000001",
+          "member": "string",
+          "name": "Uin",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key available model list (JSON array string).",
+          "example": "[\"glm-5\",\"kimi-k2.5\",\"tc-code-latest\"]",
+          "member": "string",
+          "name": "AllowedModels",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Whether the API Key is available. Values: enable (enable), disable (disable).",
+          "example": "enable",
+          "member": "string",
+          "name": "Status",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Reason for disabling the API Key. Valid values: NORMAL (normal, default value), QUOTA_EXHAUSTED (API Key quota package exhausted), ABNORMAL (exception, human intervention required)",
+          "example": "NORMAL",
+          "member": "string",
+          "name": "StopReason",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "User-side switch. Valid values: enable, disable.",
+          "example": "enable",
+          "member": "string",
+          "name": "UseStatus",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Key version.",
+          "example": "1",
+          "member": "int64",
+          "name": "KeyVersion",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Last reset time (ISO 8601).",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "LastRotatedAt",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creator. If it is created by a sub-account, this value is the sub-account UIN.",
+          "example": "100000000002",
+          "member": "string",
+          "name": "Creator",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creation time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "CreatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Update time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "UpdatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "TPM limit (Tokens Per Minute).",
+          "example": "1000000",
+          "member": "int64",
+          "name": "TPM",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)",
+          "example": "enterprise",
+          "member": "string",
+          "name": "ProductType",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenPlanApiKeyListItem": {
+      "document": "Token Plan API Key list item",
+      "members": [
+        {
+          "disabled": false,
+          "document": "API Key ID.",
+          "example": "ak-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "ApiKeyId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key secret key value (masking).",
+          "example": "sk-tp-****xxxx",
+          "member": "string",
+          "name": "ApiKey",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key name.",
+          "example": "生产Key",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Bundle ID",
+          "example": "team-tp-20260401-a1b2c3d4",
+          "member": "string",
+          "name": "TeamId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Account APP ID.",
+          "example": "1300000001",
+          "member": "string",
+          "name": "AppId",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Main account UIN. Maximum 128 characters.",
+          "example": "100000000001",
+          "member": "string",
+          "name": "Uin",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key available model list (JSON array string).",
+          "example": "[\"glm-5\"]",
+          "member": "string",
+          "name": "AllowedModels",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Whether the API Key is available. Values: enable (enable), disable (disable).",
+          "example": "enable",
+          "member": "string",
+          "name": "Status",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Reason for disabling the API Key. Value: NORMAL (normal, default value), QUOTA_EXHAUSTED (API Key quota package exhausted), ABNORMAL (abnormal, requires human intervention)",
+          "example": "NORMAL",
+          "member": "string",
+          "name": "StopReason",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "User-side switch. Valid values: enable, disable.",
+          "example": "enable",
+          "member": "string",
+          "name": "UseStatus",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Key version.",
+          "example": "1",
+          "member": "int64",
+          "name": "KeyVersion",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Last reset time (ISO 8601).",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "LastRotatedAt",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creator. If it is created by a sub-account, this value is the sub-account UIN.",
+          "example": "100000000002",
+          "member": "string",
+          "name": "Creator",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Creation time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "CreatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Update time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "UpdatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "API Key limit usage information",
+          "example": "无",
+          "member": "SubPackageBalance",
+          "name": "Balance",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package).",
+          "example": "enterprise",
+          "member": "string",
+          "name": "ProductType",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenPlanListItem": {
+      "document": "Token Plan package option",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Package ID.</p>",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)</p>",
+          "example": "enterprise",
+          "member": "string",
+          "name": "ProductType",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Package name. Maximum 128 characters.</p>",
+          "example": "生产环境套餐",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Account APP ID.</p>",
+          "example": "1300000001",
+          "member": "string",
+          "name": "AppId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Main account UIN.</p>",
+          "example": "100000000001",
+          "member": "string",
+          "name": "Uin",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Package status. Valid values: enable, disable.</p>",
+          "example": "enable",
+          "member": "string",
+          "name": "Status",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Reason for package disablement. Value: NORMAL, ISOLATED, FROZEN, EXHAUSTED, DESTROYED</p>",
+          "example": "none",
+          "member": "string",
+          "name": "StopReason",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Maximum number of API Keys that can be created.</p>",
+          "example": "0",
+          "member": "int64",
+          "name": "ApiKeyMax",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Number of API Keys currently created</p>",
+          "example": "1",
+          "member": "int64",
+          "name": "ApiKeyCount",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Cloud billing prepaid resource package ID.</p>",
+          "example": "prepay-123",
+          "member": "string",
+          "name": "PrepayResourceID",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Creator. If the package is created by a sub-account, this value is the sub-account UIN.</p>",
+          "example": "100000000002",
+          "member": "string",
+          "name": "Creator",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Creation time.</p>",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "CreatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Update time.</p>",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "UpdatedAt",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Basic information of the package.</p>",
+          "example": "无",
+          "member": "TokenPlanPackageInfo",
+          "name": "PackageInfo",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Whether to enable auto-renewal. Value: 0 (not enabled), 1 (enabled)</p>",
+          "example": "1",
+          "member": "int64",
+          "name": "AutoRenewFlag",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenPlanPackageInfo": {
+      "document": "Main limit package info",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Total quota. The unit is determined by the package type: credits for the Enterprise Professional package and tokens for the Enterprise auto package.",
+          "example": "1000000",
+          "member": "string",
+          "name": "TotalQuota",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Total used quota. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)",
+          "example": "100000",
+          "member": "string",
+          "name": "TotalUsed",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Total number of periods.",
+          "example": "1",
+          "member": "int64",
+          "name": "TotalCycles",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Period unit. Value: month",
+          "example": "month",
+          "member": "string",
+          "name": "CycleUnit",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package effective time.",
+          "example": "2026-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "StartTime",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package expiration time.",
+          "example": "2027-04-01T00:00:00Z",
+          "member": "datetime_iso",
+          "name": "ExpireTime",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Allocated quota for dedicated pool. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)",
+          "example": "500000",
+          "member": "string",
+          "name": "ExclusiveAllocated",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Used credit of the dedicated pool. The unit varies based on the package type: credits for the enterprise professional package, and tokens for the enterprise auto package.",
+          "example": "100000",
+          "member": "string",
+          "name": "ExclusiveUsed",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Total shared pool quota. The measurement unit varies based on the package type: credits (enterprise edition professional package), tokens (enterprise edition auto package).",
+          "example": "500000",
+          "member": "string",
+          "name": "SharedPool",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Shared used credit. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)",
+          "example": "50000",
+          "member": "string",
+          "name": "SharedUsed",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Current period limit. The unit varies by package type: credits (Enterprise Edition Professional), tokens (Enterprise Edition auto).",
+          "example": "1000000",
+          "member": "string",
+          "name": "CycleQuota",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Current cycle.",
+          "example": "1",
+          "member": "int64",
+          "name": "CurrentCycle",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Remaining cycle.",
+          "example": "0",
+          "member": "int64",
+          "name": "RemainCycles",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenSummary": {
+      "document": "Main package Token summary",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package serial number of the current billing cycle",
+          "example": "1",
+          "member": "int64",
+          "name": "CycleSeq",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package billing cycle start time (RFC3339)",
+          "example": "2026-04-01T00:00:00+08:00",
+          "member": "string",
+          "name": "CycleStartTime",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Package billing cycle end time (RFC3339)",
+          "example": "2026-05-01T00:00:00+08:00",
+          "member": "string",
+          "name": "CycleEndTime",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Summary list of tokens grouped by billing item",
+          "example": "无",
+          "member": "TokenSummaryBillingItem",
+          "name": "BillingItems",
+          "output_required": false,
+          "type": "list",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "TokenSummaryBillingItem": {
+      "document": "Billing item for Token aggregation",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Billing item. Values: input (input Token), output (output Token), cache (cache Token), call_count (call count).",
+          "example": "input",
+          "member": "string",
+          "name": "BillingItem",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Aggregated raw usage of this billing item during a period. Unit: tokens.",
+          "example": "1500000",
+          "member": "int64",
+          "name": "TotalQty",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "UpgradeTokenPlanTeamOrderRequest": {
+      "document": "UpgradeTokenPlanTeamOrder request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Package ID. You can obtain it through the DescribeTokenPlanList API.",
+          "example": "tp-ent-abcdefgh",
+          "member": "string",
+          "name": "TeamId",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Limit of the new specification after upgrade. For the enterprise package type, it refers to the point limit. For the enterprise-auto package type, it refers to the Token count. Must be greater than the current limit.",
+          "example": "1000000",
+          "member": "int64",
+          "name": "NewCreditOrToken",
+          "required": true,
+          "type": "int"
+        }
+      ],
+      "type": "object"
+    },
+    "UpgradeTokenPlanTeamOrderResponse": {
+      "document": "UpgradeTokenPlanTeamOrder response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Tencent Cloud order ID. Used to associate all sub-orders under an upgrade operation.",
+          "example": "20260101000000000000001",
+          "member": "string",
+          "name": "BigOrderId",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
     }
   }
 }

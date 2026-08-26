@@ -1224,6 +1224,15 @@
           "name": "Manifest",
           "required": false,
           "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "Callback address after recording completion",
+          "example": "https://www.tencent.com",
+          "member": "string",
+          "name": "CallbackURL",
+          "required": false,
+          "type": "string"
         }
       ],
       "type": "object"
