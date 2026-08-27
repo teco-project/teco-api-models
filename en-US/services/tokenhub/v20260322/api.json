@@ -133,6 +133,13 @@
       "output": "DescribeTokenPlanListResponse",
       "status": "online"
     },
+    "DescribeUsageRankList": {
+      "document": "Query the usage ranking list.\n\nMetric family (MetricType)\n- `tokens` (default): Token usage statistics. Supports Dimension = apikey / endpoint / model.\nMetrics returned: TotalToken (total) / InputTotalToken (input) / OutputTotalToken (output) / CacheTotalToken (read cache).\n- `search`: [To be launched] Online search usage statistics. Supports Dimension = apikey / endpoint / model.\nReturns metrics: SearchRequestCount (search request count)/SearchCount (search engine call count).\n\ncontent\n-The MetricType field is used to switch metric families. The response echoes back MetricType and MetricKeys.\n-TotalStats: The aggregated value of all objects over the entire time window.\n-PageStats: The aggregated value of objects on the current page.\n- TopList: A list of objects sorted by MetricKeys[0] in descending order, including the aggregated value over the entire period and point-in-time curves.",
+      "input": "DescribeUsageRankListRequest",
+      "name": "Queries usage ranking list",
+      "output": "DescribeUsageRankListResponse",
+      "status": "online"
+    },
     "ModifyApiKeyInfo": {
       "document": "Refresh API key information.\n\nThis API is used to update the remark information, IP allowlist and Token quota of an API key (recommended to use QuotaDesired parameter for quota modification). Passing no optional parameters means no modification.",
       "input": "ModifyApiKeyInfoRequest",
@@ -1860,6 +1867,236 @@
       ],
       "type": "object"
     },
+    "DescribeUsageRankListRequest": {
+      "document": "DescribeUsageRankList request structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Statistical dimension. Values: apikey (statistics by APIKey), endpoint (statistics by access point), model (statistics by model).</p>",
+          "example": "apikey",
+          "member": "string",
+          "name": "Dimension",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Start time (inclusive interval), in RFC3339 format.</p>",
+          "example": "2026-04-09T00:00:00+08:00",
+          "member": "datetime_iso",
+          "name": "StartTime",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>End time (open interval) in RFC3339 format. The maximum span from StartTime is 90 days.</p>",
+          "example": "2026-05-09T00:00:00+08:00",
+          "member": "datetime_iso",
+          "name": "EndTime",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Metric family switch field.</p><ul><li>tokens (default): Token consumption chart (statistics=sum), supports Dimension = apikey/endpoint/model</li><li>search [to be launched]: Online search call count (statistics=sum), only supports Dimension = model</li><li>Other values return InvalidParameter.</li></ul><p>Enum values:</p><ul><li>tokens: tokens</li></ul>",
+          "example": "tokens",
+          "member": "string",
+          "name": "MetricType",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Dimension filtering value. An empty string indicates querying all objects; a non-empty string indicates querying only the specified single object (for example, a designated APIKey ID). Maximum 256 characters.</p>",
+          "example": "ak-20260618-**************************",
+          "member": "string",
+          "name": "Target",
+          "required": false,
+          "type": "string"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Statistical granularity (seconds). Value: 60, 300, 3600, 86400. Must not be less than the lower limit corresponding to the span: span ≤ 1 day → 60; 1–5 days → 300; 5–10 days → 3600; &gt; 10 days → 86400. Used only when ShowAll=false.</p>",
+          "example": "300",
+          "member": "int64",
+          "name": "Period",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Pagination starting point, starting from 0, default 0. Ignore timing when ShowAll=true. Page size fixed as 10.</p>",
+          "example": "0",
+          "member": "int64",
+          "name": "Offset",
+          "required": false,
+          "type": "int"
+        },
+        {
+          "disabled": false,
+          "document": "<p>Whether to return full result.</p><ul><li>false (default): Return TopList in pages by Offset (10 items per page). Each object contains <br>Series time series points for drawing curves.</li><li>true: Ignore Offset and return the full object list without Series (CSV export scenario).</li></ul>",
+          "example": "false",
+          "member": "bool",
+          "name": "ShowAll",
+          "required": false,
+          "type": "bool"
+        }
+      ],
+      "type": "object"
+    },
+    "DescribeUsageRankListResponse": {
+      "document": "DescribeUsageRankList response structure.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Statistical dimension of the backfill request.</p>",
+          "example": "apikey",
+          "member": "string",
+          "name": "Dimension",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Metrics family of the backfill request: tokens / search.</p>",
+          "example": "tokens",
+          "member": "string",
+          "name": "MetricType",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>List of metric keys actually included in Stats / Series / PageStats / TotalStats in this response, case-sensitive by MetricType: tokens=[Total,Input,Output,Cache], search=[SearchRequestCount,SearchCount]</p>",
+          "example": "[\"TotalToken\",\"InputTotalToken\",\"OutputTotalToken\"]",
+          "member": "string",
+          "name": "MetricKeys",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>View (data source)</p>",
+          "example": "tokenhub_uin_apikeyid",
+          "member": "string",
+          "name": "ViewName",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Statistical granularity (in seconds) of the backfill request. It is 0 when ShowAll=true.</p>",
+          "example": "300",
+          "member": "int64",
+          "name": "Period",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Backfill the start time of the request.</p>",
+          "example": "2026-04-09T00:00:00+08:00",
+          "member": "datetime_iso",
+          "name": "StartTime",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>End time of the backfill request.</p>",
+          "example": "2026-05-09T00:00:00+08:00",
+          "member": "datetime_iso",
+          "name": "EndTime",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Total number of objects.</p>",
+          "example": "53",
+          "member": "int64",
+          "name": "Total",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Backfill the pagination starting point of the request. It is 0 when ShowAll=true.</p>",
+          "example": "10",
+          "member": "int64",
+          "name": "Offset",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Page size. It is always 10. When ShowAll=true, it is Total.</p>",
+          "example": "10",
+          "member": "int64",
+          "name": "Limit",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Timestamp sequence corresponding to the Series array (Unix seconds). Empty array when ShowAll=true.</p>",
+          "example": "[1715000000,1715000300]",
+          "member": "int64",
+          "name": "Timestamps",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Object ranking list, sorted by <code>MetricKeys[0]</code> in descending order. When ShowAll=false, it is the 10 objects on the current page (including Series); when ShowAll=true, it is all objects (excluding Series, used for CSV export).</p>",
+          "example": "无",
+          "member": "UsageRankItem",
+          "name": "TopList",
+          "output_required": true,
+          "type": "list",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Pagination statistics result</p>",
+          "example": "无",
+          "member": "UsageStats",
+          "name": "PageStats",
+          "output_required": true,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Total statistics result</p>",
+          "example": "无",
+          "member": "UsageStats",
+          "name": "TotalStats",
+          "output_required": true,
+          "type": "object",
+          "value_allowed_null": false
+        },
+        {
+          "document": "The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.",
+          "member": "string",
+          "name": "RequestId",
+          "type": "string"
+        }
+      ],
+      "type": "object"
+    },
     "GlossaryEntryInput": {
       "document": "Create terminology entry",
       "members": [
@@ -3254,6 +3491,194 @@
         }
       ],
       "type": "object"
+    },
+    "UsageRankItem": {
+      "document": "Usage item of an individual object in the ranking list, including the object identifier, statistical values within a time period (Stats), and a list of time series points within a time period (Series, returned only when ShowAll=false).",
+      "members": [
+        {
+          "disabled": false,
+          "document": "Global ranking (starting from 1). In pagination scenarios, this is still the position in the full sorting order, not the serial number within the page.",
+          "example": "11",
+          "member": "int64",
+          "name": "Rank",
+          "output_required": true,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Object identifier. The apikey dimension is the APIKey ID; the endpoint dimension is the access point; the model dimension is the model name.",
+          "example": "ak-xxx",
+          "member": "string",
+          "name": "Key",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Display name of the object. In the apikey dimension, return the APIKey name (deleted APIKeys retain their original names);\nKey whose endpoint and model dimensions are equal.",
+          "example": "syytest123",
+          "member": "string",
+          "name": "Name",
+          "output_required": true,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "Statistical value within a time period",
+          "example": "无",
+          "member": "UsageStats",
+          "name": "Stats",
+          "output_required": true,
+          "type": "object",
+          "value_allowed_null": true
+        },
+        {
+          "disabled": false,
+          "document": "List of time series points within a time period",
+          "example": "无",
+          "member": "UsageSeries",
+          "name": "Series",
+          "output_required": false,
+          "type": "object",
+          "value_allowed_null": true
+        }
+      ],
+      "usage": "out"
+    },
+    "UsageSeries": {
+      "document": "List of time series points within the usage time period (indexed by metric key). It is a JSON array in string form. The array length matches the response Timestamps, and null is used where there is no data point. The specific keys included are determined by the response MetricKeys.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Amount of total tokens used within a time period in JSON string form, for example, <code>&quot;[12,null,15]&quot;</code>.</p>",
+          "example": "[12,null,15]",
+          "member": "string",
+          "name": "TotalToken",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Amount of input tokens used within a time period in JSON string form, for example, <code>&quot;[7,null,9]&quot;</code>.</p>",
+          "example": "[7,null,9]",
+          "member": "string",
+          "name": "InputTotalToken",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Amount of output tokens used within a time period in JSON string form, for example, <code>&quot;[5,null,6]&quot;</code>.</p>",
+          "example": "[5,null,6]",
+          "member": "string",
+          "name": "OutputTotalToken",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Read cache token count usage of the tokens family in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>",
+          "example": "[5,null,6]",
+          "member": "string",
+          "name": "CacheTotalToken",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Usage of search requests in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>",
+          "example": "[5,null,6]",
+          "member": "string",
+          "name": "SearchRequestCount",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Usage of search engine call count in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>",
+          "example": "[5,null,6]",
+          "member": "string",
+          "name": "SearchCount",
+          "output_required": false,
+          "type": "string",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
+    },
+    "UsageStats": {
+      "document": "Statistical aggregate values within a time period (indexed by metric key). Declares that both the tokens and search field families are in this schema, with values obtained based on the actual MetricKeys returned. See the top-level `MetricKeys` field in the response.",
+      "members": [
+        {
+          "disabled": false,
+          "document": "<p>Total tokens accumulated within a time period.</p>",
+          "example": "1834000",
+          "member": "int64",
+          "name": "TotalToken",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>[tokens family] Total input tokens within a time period.</p>",
+          "example": "1100000",
+          "member": "int64",
+          "name": "InputTotalToken",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>[tokens family] Total output tokens within a time period.</p>",
+          "example": "734000",
+          "member": "int64",
+          "name": "OutputTotalToken",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>[token family] Cumulative number of tokens read from the cache within a time period (cache hit part)</p>",
+          "example": "120000",
+          "member": "int64",
+          "name": "CacheTotalToken",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>Total online search requests in the [search group]</p>",
+          "example": "100",
+          "member": "int64",
+          "name": "SearchRequestCount",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        },
+        {
+          "disabled": false,
+          "document": "<p>[search family] Total search engine calls</p>",
+          "example": "100",
+          "member": "int64",
+          "name": "SearchCount",
+          "output_required": false,
+          "type": "int",
+          "value_allowed_null": false
+        }
+      ],
+      "usage": "out"
     }
   }
 }
